@@ -1,9 +1,9 @@
-package com.example.noservendingmachine.model.money;
+package com.example.noservendingmachine.dto.money;
 
-public abstract class Coin {
+public abstract class Money {
     private final int value;
 
-    protected Coin(final int value) {
+    protected Money(final int value) {
         this.value = value;
     }
 

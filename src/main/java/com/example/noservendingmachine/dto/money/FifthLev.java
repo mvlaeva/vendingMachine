@@ -1,4 +1,4 @@
-package com.example.noservendingmachine.model.money;
+package com.example.noservendingmachine.dto.money;
 
 public class FifthLev extends Coin {
     public FifthLev() {
