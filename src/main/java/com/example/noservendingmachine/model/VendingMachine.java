@@ -13,7 +13,7 @@ public class VendingMachine {
     public static final int MAX_CAPACITY = 10;
     private final List<Product> products = new ArrayList<>(10);
 
-    private float insertedMoney = 0;
+    private int insertedMoney = 0;
 
     public void addProduct(final Product product) {
         if (products.size() < MAX_CAPACITY) {
