@@ -28,4 +28,12 @@ public class VendingMachineService {
         System.out.println("Product removed");
         return vendingMachine.removeProduct(productName);
     }
+
+    public void addMoney(final float insertedMoney) {
+        vendingMachine.addMoney(insertedMoney);
+    }
+
+    public float returnInsertedMoney() {
+        return vendingMachine.returnInsertedMoney();
+    }
 }
