@@ -32,7 +32,7 @@ public class ProductController {
         return new ResponseEntity<>(vendingMachineService.updateProduct(productDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{productId}")
+    @DeleteMapping("/{productName}")
     public ResponseEntity<String> updateProduct(@PathVariable final String productName) {
         var isDeleted = vendingMachineService.removeProduct(productName);
 
