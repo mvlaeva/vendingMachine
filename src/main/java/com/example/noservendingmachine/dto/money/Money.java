@@ -1,7 +1,10 @@
 package com.example.noservendingmachine.dto.money;
 
+import jakarta.validation.constraints.NotNull;
+
 public abstract class Money {
-    private final int value;
+    @NotNull
+    private final Integer value;
 
     protected Money(final int value) {
         this.value = value;
