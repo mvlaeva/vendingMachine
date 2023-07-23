@@ -1,0 +1,14 @@
+---
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vendingmachine
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+      platform: postgres
