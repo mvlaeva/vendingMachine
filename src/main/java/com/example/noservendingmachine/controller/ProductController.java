@@ -32,14 +32,14 @@ public class ProductController {
         return new ResponseEntity<>(vendingMachineService.updateProduct(productDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{productName}")
-    public ResponseEntity<String> updateProduct(@PathVariable final String productName) {
-        var isDeleted = vendingMachineService.removeProduct(productName);
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<Long> deleteProduct(@PathVariable final Long productId) {
+        var isDeleted = vendingMachineService.deleteProduct(productId);
 
         if (isDeleted) {
-            return new ResponseEntity<>(productName, HttpStatus.OK);
+            return new ResponseEntity<>(productId, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(productName, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(productId, HttpStatus.NOT_FOUND);
         }
     }
 }

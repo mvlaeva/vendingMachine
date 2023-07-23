@@ -3,14 +3,25 @@ package com.example.noservendingmachine.model;
 import com.example.noservendingmachine.exception.BusinessLogicException;
 import com.example.noservendingmachine.exception.MaximumCapacityExceededException;
 import com.example.noservendingmachine.exception.MinimumCapacityReached;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Entity
+@Table(name = "vending_machines")
+@NoArgsConstructor
 public class VendingMachine {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     public static final int MAX_CAPACITY = 10;
+
+    @OneToMany
     private final List<Product> products = new ArrayList<>(10);
 
     private int insertedMoney = 0;
@@ -23,9 +34,9 @@ public class VendingMachine {
         }
     }
 
-    public boolean removeProduct(final String productName) {
+    public boolean removeProduct(final Long productId) {
         if (products.size() > 0) {
-            return products.removeIf(prod -> prod.getName().equals(productName));
+            return products.removeIf(prod -> prod.getId().equals(productId));
         } else {
             throw new MinimumCapacityReached("There are no products currently in the vending machine!");
         }
@@ -33,7 +44,7 @@ public class VendingMachine {
 
     public void updateProduct(final Product product) {
         if (products.size() > 0) {
-            products.removeIf(prod -> prod.getName().equals(product.getName()));
+            products.removeIf(prod -> prod.getId().equals(product.getId()));
             products.add(product);
         } else {
             throw new MinimumCapacityReached("There are no products currently in the vending machine!");
