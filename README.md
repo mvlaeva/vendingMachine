@@ -10,3 +10,6 @@ In order to run the application as a docker container follow the steps:
 docker build -t noser-vending-machine .  
 2. Run the Docker Container:  
 docker run -p 8080:8080 noser-vending-machine
+
+Please check Swagger Documentation in the following link:  
+http://localhost:8080/swagger-ui/index.html
