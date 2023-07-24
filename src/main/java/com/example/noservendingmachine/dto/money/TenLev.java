@@ -5,6 +5,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("10lv")
 public class TenLev extends Banknote {
     protected TenLev() {
-        super(1000);
+        super(10);
     }
 }

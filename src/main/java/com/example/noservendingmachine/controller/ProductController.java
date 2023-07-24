@@ -4,6 +4,7 @@ import com.example.noservendingmachine.dto.ProductDto;
 import com.example.noservendingmachine.exception.DependencyFailedException;
 import com.example.noservendingmachine.service.VendingMachineService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,11 @@ public class ProductController {
         } else {
             throw new DependencyFailedException("You need to provide a VendingMachineService bean!");
         }
+    }
+
+    @PutMapping("/buy")
+    public ResponseEntity<String> buyProduct(@RequestBody final ProductDto productDto) {
+        return new ResponseEntity<>(vendingMachineService.buyProduct(productDto), HttpStatus.OK);
     }
 
     @PostMapping

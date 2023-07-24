@@ -22,5 +22,5 @@ import lombok.Getter;
 public abstract class Money {
     @NotNull
     @JsonProperty
-    private final Integer value;
+    private final Float value;
 }

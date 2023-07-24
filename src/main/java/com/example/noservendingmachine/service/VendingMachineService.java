@@ -1,6 +1,7 @@
 package com.example.noservendingmachine.service;
 
 import com.example.noservendingmachine.dto.ProductDto;
+import com.example.noservendingmachine.exception.BusinessLogicException;
 import com.example.noservendingmachine.model.Product;
 import com.example.noservendingmachine.model.VendingMachine;
 import com.example.noservendingmachine.repository.ProductRepository;
@@ -20,6 +21,26 @@ public class VendingMachineService {
     public VendingMachineService(final ProductRepository productRepository, final VendingMachineRepository vendingMachineRepository) {
         this.productRepository = productRepository;
         this.vendingMachineRepository = vendingMachineRepository;
+    }
+
+    public String buyProduct(final ProductDto productDto) {
+        final String productName = productDto.getName();
+        final Product product = vendingMachine.getProducts().stream()
+                .filter(prod -> prod.getName().equals(productName))
+                .findFirst()
+                .orElseThrow(() -> new BusinessLogicException("The vending machine does not contain the given product: " + productName));
+
+        if (vendingMachine.getProducts().stream().noneMatch(prod -> prod.getName().equals(productName))) {
+            throw new BusinessLogicException("The vending machine does not contain the given product: " + productName);
+        }
+        if (product.getPrice() <= vendingMachine.getInsertedMoney()) {
+            final float change = vendingMachine.buyProduct(product);
+            vendingMachineRepository.save(vendingMachine);
+            return "You bought " + productName + " and got change of: " + change;
+        } else {
+            throw new BusinessLogicException("You are trying to buy a product costing " + product.getPrice() +
+                    " with " + vendingMachine.getInsertedMoney() + " in the vending machine!");
+        }
     }
 
     public ProductDto addProduct(final ProductDto productDto) {

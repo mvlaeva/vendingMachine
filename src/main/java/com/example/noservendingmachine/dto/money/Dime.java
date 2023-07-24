@@ -5,6 +5,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("10st")
 public class Dime extends Coin {
     public Dime() {
-        super(10);
+        super(0.1f);
     }
 }

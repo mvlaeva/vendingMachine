@@ -5,6 +5,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("2lv")
 public class DoubleLev extends Coin {
     public DoubleLev() {
-        super(200);
+        super(2);
     }
 }

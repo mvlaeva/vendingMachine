@@ -23,7 +23,7 @@ public class VendingMachine {
     @OneToMany
     private final List<Product> products = new ArrayList<>(10);
 
-    private int insertedMoney = 0;
+    private float insertedMoney = 0;
 
     public void addProduct(final Product product) {
         if (products.size() < MAX_CAPACITY) {
@@ -36,6 +36,20 @@ public class VendingMachine {
     public boolean removeProduct(final Long productId) {
         if (products.size() > 0) {
             return products.removeIf(prod -> prod.getId().equals(productId));
+        } else {
+            throw new MinimumCapacityReached("There are no products currently in the vending machine!");
+        }
+    }
+
+    public float buyProduct(final Product product) {
+        if (products.size() > 0) {
+            if (products.removeIf(prod -> prod.getId().equals(product.getId()))) {
+                final float change = insertedMoney - product.getPrice();
+                insertedMoney = 0;
+                return change;
+            } else {
+                throw new BusinessLogicException("No such product in the vending machine: " + product.getName() + "!");
+            }
         } else {
             throw new MinimumCapacityReached("There are no products currently in the vending machine!");
         }
@@ -60,7 +74,7 @@ public class VendingMachine {
 
     public float returnInsertedMoney() {
         if (insertedMoney > 0) {
-            int moneyToReturn = insertedMoney;
+            float moneyToReturn = insertedMoney;
             insertedMoney = 0;
             return moneyToReturn;
         } else {
