@@ -61,7 +61,9 @@ public class VendingMachine {
 
     public float returnInsertedMoney() {
         if (insertedMoney > 0) {
-            return insertedMoney;
+            int money = insertedMoney;
+            insertedMoney = 0;
+            return money;
         } else {
             throw new BusinessLogicException("No money were previously inserted!");
         }

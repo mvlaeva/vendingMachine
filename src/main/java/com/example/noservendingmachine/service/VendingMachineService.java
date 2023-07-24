@@ -51,9 +51,12 @@ public class VendingMachineService {
 
     public void addMoney(final float insertedMoney) {
         vendingMachine.addMoney(insertedMoney);
+        vendingMachineRepository.save(vendingMachine);
     }
 
     public float returnInsertedMoney() {
-        return vendingMachine.returnInsertedMoney();
+        final float previouslyInsertedMoney = vendingMachine.returnInsertedMoney();
+        vendingMachineRepository.save(vendingMachine);
+        return previouslyInsertedMoney;
     }
 }
