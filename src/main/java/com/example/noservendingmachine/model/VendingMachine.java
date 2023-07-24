@@ -4,7 +4,6 @@ import com.example.noservendingmachine.exception.BusinessLogicException;
 import com.example.noservendingmachine.exception.MaximumCapacityExceededException;
 import com.example.noservendingmachine.exception.MinimumCapacityReached;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -61,9 +60,9 @@ public class VendingMachine {
 
     public float returnInsertedMoney() {
         if (insertedMoney > 0) {
-            int money = insertedMoney;
+            int moneyToReturn = insertedMoney;
             insertedMoney = 0;
-            return money;
+            return moneyToReturn;
         } else {
             throw new BusinessLogicException("No money were previously inserted!");
         }
